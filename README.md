@@ -31,52 +31,54 @@ Programa realizado con fines educativos para la Universidad Autónoma de San Lui
 🛠 Uso
 Ejecuta el bot con:
 
-    ```bash
+    ```ini
     python bot.py
 
 Luego, en tu servidor de Discord, usa el prefijo $ para llamar los comandos, por ejemplo:
+ 
+    ```ini
+    $hola — Saluda al servidor.
 
-$hola — Saluda al servidor.
+    $ruleta — Juega a la ruleta rusa.
 
-$ruleta — Juega a la ruleta rusa.
+    $joke — Obtén un chiste de Chuck Norris traducido.
 
-$joke — Obtén un chiste de Chuck Norris traducido.
+    $translate <texto> — Traduce texto de inglés a español.
 
-$translate <texto> — Traduce texto de inglés a español.
+    $meme — Recibe un meme aleatorio.
 
-$meme — Recibe un meme aleatorio.
+    $insulto — Obtén un insulto aleatorio traducido.
 
-$insulto — Obtén un insulto aleatorio traducido.
+    $consejo — Recibe un consejo traducido.
 
-$consejo — Recibe un consejo traducido.
+    $siono — Responde con sí o no a una pregunta.
 
-$siono — Responde con sí o no a una pregunta.
+    $darkjoke — Recibe un chiste oscuro.
 
-$darkjoke — Recibe un chiste oscuro.
-
-$ayuda — Muestra la lista de comandos disponibles.
+    $ayuda — Muestra la lista de comandos disponibles.
 
 📦 Dependencias
-discord.py para la interacción con Discord.
+    ```ini
+    discord.py para la interacción con Discord.
 
-aiohttp para hacer peticiones HTTP asíncronas.
+    aiohttp para hacer peticiones HTTP asíncronas.
 
-python-dotenv para cargar variables de entorno desde .env.
+    python-dotenv para cargar variables de entorno desde .env.
 
 🔐 Variables de entorno
-DISCORD — Token de acceso para el bot de Discord.
-
-ORS — API key para OpenRouteService (si usas funcionalidades de mapas).
+        ```ini
+    DISCORD — Token de acceso para el bot de Discord.
 
 📚 Recursos
-Documentación de discord.py
+ ```ini
+    Documentación de discord.py
 
-API de Chuck Norris Jokes
+    API de Chuck Norris Jokes
 
-MyMemory Translation API
+    MyMemory Translation API
 
-Advice Slip JSON API
+    Advice Slip JSON API
 
-YesNo WTF API
+    YesNo WTF API
 
-JokeAPI
+    JokeAPI

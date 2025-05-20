@@ -11,7 +11,6 @@ import json
 # Token de acceso al bot de Discord
 load_dotenv()
 TOKEN = os.getenv("DISCORD")
-ORS_API_KEY = os.getenv("ORS")
 
 # Intents son necesairios para comunicarse con los eventos de Discord
 # https://discordpy.readthedocs.io/en/stable/intents.html
@@ -62,11 +61,11 @@ async def joke(ctx):
                     if resp_trad.status == 200:
                         trad_data = await resp_trad.json()
                         chiste_es = trad_data["responseData"]["translatedText"]
-                        await ctx.send(f"Aqui te va un chiste 😂: {chiste_es}")
+                        await ctx.send(f"Aqui te va un chiste :rofl: : {chiste_es}")
                     else:
                         await ctx.send("Chuck se ha cansado de compartir chistes. Intenta más tarde. \n Tampoco podras traducir jaja!")
             else:
-                await ctx.send("Chuck Norris no quiere compartir chistes ahora 😤.")
+                await ctx.send("Chuck Norris no quiere compartir chistes ahora :face_with_monocle:.")
 
 @bot.command()
 async def translate(ctx, *, text):
