@@ -31,12 +31,10 @@ Programa realizado con fines educativos para la Universidad Autónoma de San Lui
 🛠 Uso
 Ejecuta el bot con:
 
-    ```ini
     python bot.py
 
 Luego, en tu servidor de Discord, usa el prefijo $ para llamar los comandos, por ejemplo:
  
-    ```ini
     $hola — Saluda al servidor.
 
     $ruleta — Juega a la ruleta rusa.
@@ -58,7 +56,7 @@ Luego, en tu servidor de Discord, usa el prefijo $ para llamar los comandos, por
     $ayuda — Muestra la lista de comandos disponibles.
 
 📦 Dependencias
-    ```ini
+
     discord.py para la interacción con Discord.
 
     aiohttp para hacer peticiones HTTP asíncronas.
@@ -66,11 +64,11 @@ Luego, en tu servidor de Discord, usa el prefijo $ para llamar los comandos, por
     python-dotenv para cargar variables de entorno desde .env.
 
 🔐 Variables de entorno
-        ```ini
+
     DISCORD — Token de acceso para el bot de Discord.
 
 📚 Recursos
- ```ini
+
     Documentación de discord.py
 
     API de Chuck Norris Jokes
