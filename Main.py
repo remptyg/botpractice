@@ -162,7 +162,7 @@ async def darkjoke(ctx):
                 data = await resp.json()
                 if data["type"] == "single":
                     joke = data["joke"]
-                else:  # type == "twopart"
+                else:
                     joke = f'{data["setup"]}\n{data["delivery"]}'
                 await ctx.send(f"Aqui tienes un chiste oscuro: \n{joke}")
    
