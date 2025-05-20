@@ -8,8 +8,8 @@ Programa realizado con fines educativos para la Universidad Autónoma de San Lui
 1. Clona el repositorio (si aún no lo has hecho):
 
    ```bash
-   git clone https://github.com/tuusuario/tu-repo
-   cd tu-repo
+   git clone https://github.com/remptyg/botpractice
+   cd ../botpractice
 
 2. Crear y activar un entorno virtual recomendado (venv):
     
