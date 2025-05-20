@@ -1,4 +1,4 @@
-# Bot de discord para pasar mi materia de interfaces. Atte: Adair, el mejor alumno que ha tenido.
+# Bot de discord para pasar mi materia de interfaces. Adair
 # Permission Integer = 1145153371925568; Valor integral que determina los permisos del bot en el servidor.
 import discord
 from discord.ext import commands
@@ -7,21 +7,11 @@ import os
 from dotenv import load_dotenv
 import aiohttp
 import json
-from geopy.geocoders import Nominatim
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
-from geopy.geocoders import Nominatim
-import asyncio
-import tempfile
-from folium import Map, GeoJson
 
 # Token de acceso al bot de Discord
 load_dotenv()
-TOKEN = os.getenv("DISCORD_TOKEN")
-ORS_API_KEY = os.getenv("ORS_API_KEY")
-print(f"DISCORD TOKEN: {TOKEN}")
-print(f"ORS TOKEN: {ORS_API_KEY}")
+TOKEN = os.getenv("DISCORD")
+ORS_API_KEY = os.getenv("ORS")
 
 # Intents son necesairios para comunicarse con los eventos de Discord
 # https://discordpy.readthedocs.io/en/stable/intents.html
@@ -89,73 +79,6 @@ async def translate(ctx, *, text):
                 await ctx.send(f"Traducción: {translated_text}")
             else:
                 await ctx.send("Error al traducir el texto. O Tokens acabados por hoy (Chuck Norris se canso de traducir).")
-
-@bot.command()
-async def ruta(ctx, *, lugares: str):
-    await ctx.send("Procesando lugares...")
-
-    if " a " not in lugares:
-        await ctx.send("Formato incorrecto. Usa: `$ruta CiudadOrigen a CiudadDestino`")
-        return
-
-    origen_str, destino_str = lugares.split(" a ", 1)
-
-    geolocator = Nominatim(user_agent="discord-bot")
-    origen = geolocator.geocode(origen_str)
-    destino = geolocator.geocode(destino_str)
-
-    if not origen or not destino:
-        await ctx.send("No pude encontrar uno de los lugares. Verifica la ortografía.")
-        return
-
-    await ctx.send(f"Generando ruta desde **{origen.address}** hasta **{destino.address}**...")
-
-    # Coordenadas para ORS
-    api_key = os.getenv("ORS_API_KEY")
-    coords = [[origen.longitude, origen.latitude], [destino.longitude, destino.latitude]]
-    headers = {
-        "Authorization": api_key,
-        "Content-Type": "application/json"
-    }
-    body = {
-        "coordinates": coords
-    }
-
-    # Consulta a ORS
-    async with aiohttp.ClientSession() as session:
-        async with session.post("https://api.openrouteservice.org/v2/directions/driving-car/geojson",
-                                headers=headers, json=body) as response:
-            if response.status != 200:
-                await ctx.send("Error al obtener la ruta.")
-                return
-            data = await response.json()
-
-    mid_lat = (origen.latitude + destino.latitude) / 2
-    mid_lon = (origen.longitude + destino.longitude) / 2
-    mapa = Map(location=[mid_lat, mid_lon], zoom_start=7)
-    GeoJson(data).add_to(mapa)
-
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".html") as tmp_html:
-        mapa.save(tmp_html.name)
-        html_path = tmp_html.name
-
-    # Captura imagen
-    options = Options()
-    options.add_argument("--headless")
-    options.add_argument("--window-size=1024,768")
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-    driver.get("file://" + html_path)
-    await asyncio.sleep(2)
-
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as tmp_img:
-        driver.save_screenshot(tmp_img.name)
-        img_path = tmp_img.name
-
-    driver.quit()
-
-    # Enviar mapa
-    await ctx.send(file=discord.File(img_path, filename="ruta.png"))
-
 
 @bot.command()
 async def meme(ctx):
@@ -248,19 +171,10 @@ async def darkjoke(ctx):
 async def ayuda(ctx):
     embed = discord.Embed(title="Comandos disponibles", color=0x00ff30)
     embed.add_field(name="$ayuda", value="Muestra esta lista de comandos.", inline=False)
-    embed = discord.Embed(title="Comandos disponibles", color=0x00ff30)
-    embed.add_field(name="$ayuda", value="Muestra esta lista de comandos.", inline=False)
     embed.add_field(name="$hola", value="Saluda al servidor.", inline=False)
     embed.add_field(name="$ruleta", value="Juega a la ruleta rusa.", inline=False)
     embed.add_field(name="$joke", value="Recibe un chiste de Chuck Norris.", inline=False)
     embed.add_field(name="$translate <texto>", value="Traduce el texto de inglés a español.", inline=False)
-    embed.add_field(name="$ruta <origen> <destino>", value="Calcula la ruta entre dos lugares.", inline=False)
-    embed.add_field(name="$meme", value="Recibe un meme aleatorio.", inline=False)
-    embed.add_field(name="$insulto", value="Recibe un insulto aleatorio.", inline=False)
-    embed.add_field(name="$consejo", value="Recibe un consejo aleatorio.", inline=False)
-    embed.add_field(name="$siono", value="Responde a una pregunta con 'Sí' o 'No'.", inline=False)
-    embed.add_field(name="$darkjoke", value="Recibe un chiste oscuro.", inline=False)
-    embed.add_field(name="$ruta <origen> <destino>", value="Calcula la ruta entre dos lugares.", inline=False)
     embed.add_field(name="$meme", value="Recibe un meme aleatorio.", inline=False)
     embed.add_field(name="$insulto", value="Recibe un insulto aleatorio.", inline=False)
     embed.add_field(name="$consejo", value="Recibe un consejo aleatorio.", inline=False)
